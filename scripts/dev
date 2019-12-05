@@ -1,0 +1,1 @@
+NODE_ENV=development webpack --mode=development --config ./client/configs/webpack.dev.config.js --watch

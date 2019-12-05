@@ -2,9 +2,10 @@
   "name": "Loa",
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "./scripts/watch-dev",
+    "start": "nodemon --exec babel-node server/index.js"
   },
   "keywords": [],
   "author": "",
@@ -22,10 +23,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",
+    "@babel/node": "^7.7.4",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
-    "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "cors": "^2.8.5",
