@@ -6,9 +6,6 @@ import {InitEnvironment} from "helpers";
 import bodyParser from "body-parser";
 import cors from "cors";
 
-// INIT GLOBAL
-InitEnvironment();
-
 // server
 const publicFolder = path.resolve(__dirname, "./public");
 const app = express();
