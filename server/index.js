@@ -1,7 +1,8 @@
+// GLOBAL CONFIG INIT
+import {InitEnvironment} from "helpers";
+// main
 import express from "express";
 import path from "path";
-//helpers
-import {InitEnvironment} from "helpers";
 // additional
 import bodyParser from "body-parser";
 import cors from "cors";

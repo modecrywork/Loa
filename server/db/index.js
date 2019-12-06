@@ -1,9 +1,6 @@
 import mongoose from "mongoose";
-import  fs from "fs";
-import {ENVIROMENT_CONFIG}  from "configs/environment";
 
-//dev  TODO: ПЕРЕДЕЛАТЬ
-const dev_config = ENVIROMENT_CONFIG.development;
+const {dbUrl,dbname} = SERVER_CONFIG;
 
 const mongooseOptions = {
     promiseLibrary:    global.Promise,
@@ -17,8 +14,9 @@ const mongooseOptions = {
     useCreateIndex:    true,
 };
 
-const db = mongoose.connect(dev_config.db, mongooseOptions);
-//hamdle connect
+const db = mongoose.connect(dbUrl+dbname, mongooseOptions);
+
+// handle connect
 db.then(() => {
     console.log("Connection to DB");
 }).catch(({message}) => {
