@@ -4,7 +4,8 @@
     ["module-resolver", {
       "root": ["."],
       "alias": {
-        "configs": "./server/configs"
+        "configs": "./server/configs",
+        "helpers": "./server/helpers"
       }
     }]
   ]
