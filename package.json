@@ -8,7 +8,9 @@
     "build-front:dev": "cross-env NODE_ENV=development webpack --mode=development --config ./client/webpack.config.js",
     "build-front:prod": "cross-env NODE_ENV=production webpack --mode=production --config ./client/webpack.config.js",
     "dev:back": "cross-env NODE_ENV=development nodemon --exec babel-node server/index.js",
-    "start:dev": "npm-run-all --parallel dev:back dev:front"
+    "prod:back": "cross-env NODE_ENV=production nodemon --exec babel-node server/index.js",
+    "start:dev": "npm-run-all -p  dev:back dev:front",
+    "start:prod": "npm-run-all -p build-front:prod dev:back"
   },
   "keywords": [],
   "author": "",

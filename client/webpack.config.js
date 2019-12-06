@@ -1,12 +1,18 @@
+const appConfig = require("../app-config");
 const webpack = require("webpack");
 const path = require("path");
+
+// plugins
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 const  UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
+// development settings
 const isDev = process.env.NODE_ENV === "development";
-const port = isDev ? 3001 : 4000;
+const {production, development} = appConfig;
+const port = isDev ? development.port : production.port;
+
 /*
   plugins configs
 */
@@ -21,7 +27,7 @@ const CleanWebpackPluginConfig = new CleanWebpackPlugin({
 });
 
 /*
-* confgigs
+*  webpack development configs
 * */
 const baseConfig = {
     entry: ["./client/index.js", "./client/assets/index.js"],
@@ -73,6 +79,7 @@ const baseConfig = {
 const devConfg = {
     devtool: "eval-sourcemap"
 }
+
 const productionConfig = {
     optimization:{
         minimizer: [
@@ -88,12 +95,13 @@ const productionConfig = {
     },
 }
 
+// get target config
 let targetConfig;
+
 if (isDev){
     targetConfig = {...baseConfig,...devConfg};
 }else{
     const plugins = [
-        new BundleAnalyzerPlugin(),
         new webpack.LoaderOptionsPlugin({
             minimize: true,
         })
