@@ -2,7 +2,7 @@ import appConfig from "../../app-config.json";
 
 const {production, development} = appConfig;
 
-export const ENVIROMENT_CONFIG = {
+export const ENVIRONMENT_CONFIG = {
     production:{
         port: production.port
     },
