@@ -4,7 +4,7 @@ import path from "path";
 import bodyParser from "body-parser";
 import cors from "cors";
 // configs
-import {ENVIROMENT_CONFIG} from "./configs/environment";
+import {ENVIROMENT_CONFIG} from "configs/environment";
 
 //environment
 const isDev = process.env.NODE_ENV === "development";
