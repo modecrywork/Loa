@@ -1,66 +1,105 @@
+const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const {CleanWebpackPlugin} = require("clean-webpack-plugin");
+const  UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const isDev = process.env.NODE_ENV === "development";
-
+const port = isDev ? 3001 : 4000;
 /*
   plugins configs
 */
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: path.resolve(__dirname, `./index.html`),
-  filename: "index.html",
-  inject: "body"
+    template: path.resolve(__dirname, `./index.html`),
+    filename: "index.html",
+    inject: "body"
 });
 
 const CleanWebpackPluginConfig = new CleanWebpackPlugin({
-  verbose: true
+    verbose: true
 });
 
-module.exports = {
-  entry: ["./client/index.js", "./client/assets/index.js"],
-  output: {
-    path: path.resolve("server/public"),
-    filename: "index_bundle.js"
-  },
-  devServer: {
-    proxy: [
-      {
-        path: "/api/",
-        target: "http://localhost:3001"
-      }
-    ],
-    historyApiFallback: true
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        loader: "babel-loader"
-      },
-      {
-        test: /\.(jpe?g|png|gif)$/i,
-        use: [
-          {
-            loader: "file-loader",
-            options: { name: "images/[name].[ext]" }
-          },
-          {
-            loader: "image-webpack-loader",
-            options: {
-              optipng: { optimizationLevel: 7 },
-              pngquant: { quality: [0.75, 0.9], speed: 3 },
-              mozjpeg: { progressive: true },
-              gifsicle: { interlaced: false }
+/*
+* confgigs
+* */
+const baseConfig = {
+    entry: ["./client/index.js", "./client/assets/index.js"],
+    output: {
+        path: path.resolve("server/public"),
+        filename: "index_bundle.js"
+    },
+    devServer: {
+        proxy: [
+            {
+                path: "/api/",
+                target: `http://localhost:${port}`
             }
-          }
+        ],
+        historyApiFallback: true
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                loader: "babel-loader"
+            },
+            {
+                test: /\.(jpe?g|png|gif)$/i,
+                use: [
+                    {
+                        loader: "file-loader",
+                        options: {name: "images/[name].[ext]"}
+                    },
+                    {
+                        loader: "image-webpack-loader",
+                        options: {
+                            optipng: {optimizationLevel: 7},
+                            pngquant: {quality: [0.75, 0.9], speed: 3},
+                            mozjpeg: {progressive: true},
+                            gifsicle: {interlaced: false}
+                        }
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  plugins: [HtmlWebpackPluginConfig, CleanWebpackPluginConfig],
-  performance: {
-    hints: false
-  },
-  devtool: "eval-sourcemap"
+    },
+    plugins: [HtmlWebpackPluginConfig, CleanWebpackPluginConfig],
+    performance: {
+        hints: false
+    },
 };
+
+const devConfg = {
+    devtool: "eval-sourcemap"
+}
+const productionConfig = {
+    optimization:{
+        minimizer: [
+            new UglifyJsPlugin({
+                uglifyOptions: {
+                    compress: {
+                        drop_console: true,
+                    },
+                },
+                sourceMap: true,
+            }),
+        ],
+    },
+}
+
+let targetConfig;
+if (isDev){
+    targetConfig = {...baseConfig,...devConfg};
+}else{
+    const plugins = [
+        new BundleAnalyzerPlugin(),
+        new webpack.LoaderOptionsPlugin({
+            minimize: true,
+        })
+    ]
+    targetConfig = {...baseConfig,...productionConfig};
+    targetConfig.plugins = [...targetConfig.plugins,...plugins];
+}
+
+module.exports = targetConfig;
