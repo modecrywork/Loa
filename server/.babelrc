@@ -4,7 +4,11 @@
     ["module-resolver", {
       "root": ["."],
       "alias": {
-        "configs": "./server/configs"
+        "configs": "./server/configs",
+        "controllers": "./server/controllers",
+        "models": "./server/models",
+        "middlewares": "./server/middlewares",
+        "helpers": "./server/helpers"
       }
     }]
   ]
