@@ -1,0 +1,1 @@
+export CatModel from "./Cat";
