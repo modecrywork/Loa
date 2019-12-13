@@ -1,3 +1,3 @@
-import {InitEnvironment} from "./initEnvironment";
+import { InitEnvironment } from "./initEnvironment";
 
-export {InitEnvironment};
+export { InitEnvironment };

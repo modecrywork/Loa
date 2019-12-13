@@ -1,2 +1,1 @@
-export {cat} from "./Cat";
-
+export { cat } from "./Cat";
