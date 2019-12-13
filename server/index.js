@@ -1,10 +1,12 @@
 // GLOBAL CONFIG INIT
-import path from "path";
-
 import { InitEnvironment } from "helpers";
+
+// db connection
+ import db from "db";
 
 // main
 import express from "express";
+import path from "path";
 
 // additional
 import bodyParser from "body-parser";

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const { dbUrl, dbname } = SERVER_CONFIG;
+const { dbUrl, dbName } = SERVER_CONFIG;
 
 const mongooseOptions = {
   promiseLibrary: global.Promise,
@@ -14,11 +14,11 @@ const mongooseOptions = {
   useCreateIndex: true
 };
 
-const db = mongoose.connect(dbUrl + dbname, mongooseOptions);
+const db = mongoose.connect(dbUrl + dbName, mongooseOptions);
 
 // handle connect
-db.then(() => {
-  console.log("Connection to DB");
+db.then((state) => {
+  console.log(`Connected to DB: ${dbUrl + dbName}`);
 }).catch(({ message }) => {
   console.log(`Connection to DB ERROR: ${message}`);
 });
