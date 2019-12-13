@@ -1,1 +1,3 @@
-export CatModel from "./Cat";
+import CatModel from "./Cat";
+
+export { CatModel };

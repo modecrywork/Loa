@@ -10,10 +10,10 @@ const schema = new mongoose.Schema(
     age: Number,
     favorite: {
       type: Boolean,
-      default: false
+      default: true
     }
   },
   { timestamps: { createdAt: "created", updatedAt: "modified" } }
 );
 
-export const cat = mongoose.model("cat", schema);
+export const catScheme = mongoose.model("Cat", schema, "cat");

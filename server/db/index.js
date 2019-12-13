@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const { dbUrl, dbName } = SERVER_CONFIG;
-
+const dbAddres = dbUrl + dbName;
 const mongooseOptions = {
   promiseLibrary: global.Promise,
   poolSize: 3,
@@ -14,13 +14,11 @@ const mongooseOptions = {
   useCreateIndex: true
 };
 
-const db = mongoose.connect(dbUrl + dbName, mongooseOptions);
-
-// handle connect
-db.then((state) => {
-  console.log(`Connected to DB: ${dbUrl + dbName}`);
-}).catch(({ message }) => {
-  console.log(`Connection to DB ERROR: ${message}`);
-});
-
-export default db;
+mongoose
+  .connect(dbAddres, { useNewUrlParser: true })
+  .then(() => {
+    console.log(`Connected to DB: ${dbAddres}`);
+  })
+  .catch(({ message }) => {
+    console.log(`Connection to DB ERROR: ${message}`);
+  });

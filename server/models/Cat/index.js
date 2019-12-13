@@ -1,22 +1,25 @@
-import { cat } from "schemas";
+import { catScheme } from "schemas";
 
 export class CatModel {
   constructor(data) {
     this.data = data;
   }
 
-  _formatCat = cat => {
-    return {
-      _id: cat.id,
-      name: cat.name,
-      age: cat.age,
-      created: cat.created
-    };
-  };
+  _formatCat = data =>
+    data.map(cat => {
+      return {
+        _id: cat._id,
+        name: cat.name,
+        favorite: cat.favorite,
+        age: cat.age,
+        created: cat.created
+      };
+    });
 
   read = async () => {
-    const source = await cat.find({}).sort({ created: -1 }).lean;
-    return data.map(this._formatCat);
+    const source = await catScheme.find({}).lean();
+    const data = this._formatCat(source);
+    return data;
   };
 }
 
