@@ -1,3 +1,4 @@
-import {InitEnvironment} from "./initEnvironment";
+import initEnvironment from "./initEnvironment";
+import initRouters from "./initRouters";
 
-export {InitEnvironment};
+export { initEnvironment, initRouters };
