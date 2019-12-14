@@ -41,6 +41,7 @@
     "webpack-cli": "^3.3.10"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.7.5",
     "cors": "^2.8.5",
     "cross-env": "^6.0.3",
     "eslint": "^6.7.2",
