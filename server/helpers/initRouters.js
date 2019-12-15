@@ -6,7 +6,7 @@
  */
 const initRouters = (app, routers) => {
   routers.forEach(({ path, route }) => {
-    app.use(path, route);
+    app.use(`/api${path}`, route);
   });
 };
 
