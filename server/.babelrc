@@ -1,6 +1,7 @@
 {
   "presets": ["@babel/preset-env"],
   "plugins": ["@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-optional-chaining",
     ["module-resolver", {
       "root": ["."],
       "alias": {
@@ -10,7 +11,8 @@
         "middlewares": "./server/middlewares",
         "helpers": "./server/helpers",
         "db": "./server/db",
-        "schemas": "./server/db/schemas"
+        "schemas": "./server/db/schemas",
+        "routers": "./server/routers"
       }
     }]
   ]
