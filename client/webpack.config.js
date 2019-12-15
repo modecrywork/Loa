@@ -19,7 +19,7 @@ const port = isDev ? development.port : production.port;
   plugins configs
 */
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: path.resolve(__dirname, `./index.html`),
+  template: path.resolve(__dirname, `templates/index.html`),
   filename: "index.html",
   inject: "body"
 });
@@ -75,6 +75,15 @@ const baseConfig = {
   plugins: [HtmlWebpackPluginConfig, CleanWebpackPluginConfig],
   performance: {
     hints: false
+  },
+  resolve: {
+    alias: {
+      core: path.resolve(__dirname, "src/core/"),
+      constants: path.resolve(__dirname, "src/constants/"),
+      containers: path.resolve(__dirname, "src/containers/"),
+      contexts: path.resolve(__dirname, "src/contexts/"),
+      sources: path.resolve(__dirname, "src/sources/")
+    }
   }
 };
 
