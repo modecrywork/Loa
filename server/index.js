@@ -29,6 +29,13 @@ app.use(express.static(publicFolder));
 
 initRouters(app, routers);
 
+// Handles any requests that don't match the ones above
+app.get('*', (req,res) =>{
+  res.sendFile(path.join(__dirname + "/public/index.html"));
+});
+
+
+
 app.listen(SERVER_CONFIG.port, () =>
   console.log(`Server start on: ${SERVER_CONFIG.port}`)
 );

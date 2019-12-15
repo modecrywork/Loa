@@ -82,7 +82,8 @@ const baseConfig = {
       constants: path.resolve(__dirname, "src/constants/"),
       containers: path.resolve(__dirname, "src/containers/"),
       contexts: path.resolve(__dirname, "src/contexts/"),
-      sources: path.resolve(__dirname, "src/sources/")
+      sources: path.resolve(__dirname, "src/sources/"),
+      routers: path.resolve(__dirname, "src/routers/")
     }
   }
 };
