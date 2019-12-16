@@ -1,3 +1,5 @@
-import {InitEnvironment} from "./initEnvironment";
+import initEnvironment from "./initEnvironment";
+import initRouters from "./initRouters";
+import dataFiller from "./dataFormater";
 
-export {InitEnvironment};
+export {initEnvironment, initRouters, dataFiller};

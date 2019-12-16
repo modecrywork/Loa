@@ -1,11 +1,20 @@
 // GLOBAL CONFIG INIT
-import {InitEnvironment} from "helpers";
+import path from "path";
+
+import { initEnvironment, initRouters } from "helpers";
+
+// db connection
+import  "db";
+
 // main
 import express from "express";
-import path from "path";
+
 // additional
 import bodyParser from "body-parser";
 import cors from "cors";
+
+// routes
+import routers from "routers";
 
 // server
 const publicFolder = path.resolve(__dirname, "./public");
@@ -13,6 +22,20 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(express.static(publicFolder));
 
-app.listen(SERVER_CONFIG.port, () => console.log(`Server start on: ${SERVER_CONFIG.port}`));
+initRouters(app, routers);
+
+// Handles any requests that don't match the ones above
+app.get('*', (req,res) =>{
+  res.sendFile(path.join(__dirname + "/public/index.html"));
+});
+
+
+
+app.listen(SERVER_CONFIG.port, () =>
+  console.log(`Server start on: ${SERVER_CONFIG.port}`)
+);
