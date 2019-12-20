@@ -20,11 +20,12 @@ class BaseModel {
     return dataFiller(data, this.fields[0]);
   };
 
-  read = async schemeName => {
+  read = async (subject, schemeName) => {
     let scheme = this.schemas.defaultScheme;
     if (schemeName) scheme = this.schemas[schemeName];
+    const searchable = subject || {};
+    const source = await scheme.find(searchable).lean();
 
-    const source = await scheme.find({}).lean();
     return this._formatData(source);
   };
 

@@ -1,3 +1,4 @@
 import CatController from "./Cat";
+import UserController from "./User";
 
-export { CatController };
+export { CatController, UserController };
